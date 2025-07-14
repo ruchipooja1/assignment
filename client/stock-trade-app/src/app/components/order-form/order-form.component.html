@@ -1,0 +1,40 @@
+<div class="order-form-container">
+  <h2>Place Stock Order</h2>
+<form [formGroup]="orderForm" (ngSubmit)="submitOrder()">
+  <div class="form-group">
+    <label for="symbol">Stock Symbol</label>
+    <input id="symbol" formControlName="symbol" class="form-control" placeholder="Enter stock symbol" />
+    <div *ngIf="orderForm.get('symbol')?.invalid && orderForm.get('symbol')?.touched" class="text-danger">
+      Stock symbol is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="quantity">Quantity</label>
+    <input id="quantity" type="number" formControlName="quantity" class="form-control" placeholder="Enter quantity" />
+    <div *ngIf="orderForm.get('quantity')?.invalid && orderForm.get('quantity')?.touched" class="text-danger">
+      Quantity must be a positive number.
+    </div>
+   
+</div>
+<div>
+    <button type="button" [disabled]="orderForm.invalid" (click)="showConfirm = true">Preview Order</button>
+</div>
+</form>
+</div>
+
+<div *ngIf="orderForm.get('quantity')?.value">
+<p>Total Cost: Euro {{ totalCost }} </p>
+</div>
+
+<div *ngIf="showConfirm" class="confirm-dialog">
+<p>
+    You are able to buy {{ orderForm.value.quantity }} Apple shares ({{orderForm.value.symbol }}) for Euro {{ totalCost }}.
+</p>
+<button (click)="submitOrder()">Confirm</button>
+<button (click)="showConfirm=false">Cancel</button>
+</div>
+
+<div *ngIf="orderStatus">
+  <p>{{ orderStatus }}</p>
+</div>
