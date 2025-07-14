@@ -1,4 +1,6 @@
 <div class="order-form-container">
+   <h1>Van Lanschot Trading Portal</h1>
+    <p>Welcome to the Van Lanschot Trading Portal. Please use the form below to place your stock orders.</p>
   <h2>Place Stock Order</h2>
 <form [formGroup]="orderForm" (ngSubmit)="submitOrder()">
   <div class="form-group">
@@ -38,3 +40,4 @@
 <div *ngIf="orderStatus">
   <p>{{ orderStatus }}</p>
 </div>
+
