@@ -22,7 +22,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
 
-    this.orderForm.reset();
+    this.orderForm?.reset();
     this.orderStatus = null;
     this.showConfirm = false;
     this.newBalance = 0;

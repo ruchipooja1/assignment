@@ -9,5 +9,5 @@ import { OrderFormComponent } from './components/order-form/order-form.component
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'stock-trade-app';
+ 
 }
