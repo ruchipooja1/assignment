@@ -4,7 +4,7 @@ public static class InMemoryDatabase
 	private static decimal _cashBalance = 10000m;
 	private static Dictionary<string, int> _holdings = new Dictionary<string, int> ();
 	private static Dictionary<string, StockQuote> _stockQuotes = new() {
-	 { "Apple", new StockQuote { Symbol = "Apple", Price = 180 } }
+	 { "APPL", new StockQuote { Symbol = "APPL", Price = 180 } }
 
 	 };
 	private static List<OrderHistoryItem> _orderHistory = new();
@@ -27,8 +27,7 @@ public static class InMemoryDatabase
 
 	}
 
-	
-	
+
 	 public static void RecordOrder(string symbol, int quantity, decimal price)
 	 {
 		_orderHistory.Add(new OrderHistoryItem

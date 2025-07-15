@@ -44,3 +44,14 @@ button:disabled {
   background-color: #aaa;
   cursor: not-allowed;
 }
+
+.status-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+

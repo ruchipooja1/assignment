@@ -40,6 +40,13 @@ public class OrderService : IOrderService {
             validationMessage = "Stock symbol is required.";
             return false;
         }
+
+        if (req.Symbol?.ToUpper() != "APPL")
+        {
+            validationMessage = "Only 'APPL' is supported.";
+            return false;
+        }
+
         if (req.Quantity <= 0)
         {
             validationMessage = "Quantity must be greater than zero.";

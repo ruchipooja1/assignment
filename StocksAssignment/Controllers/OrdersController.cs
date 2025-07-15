@@ -8,23 +8,25 @@ namespace StocksAssignment.Controllers
     [Route("api/[controller]")]
     public class OrdersController : ControllerBase
     {
-        private readonly IOrderService _orderService; 
+        private readonly IOrderService _orderService;
 
         public OrdersController(IOrderService orderService)
         {
             _orderService = orderService;
         }
 
-        
+
         [HttpPost("execute")]
-        public IActionResult ExecuteOrder(OrderRequest req)
+        public IActionResult ExecuteOrder(OrderRequest request)
         {
-            if (!_orderService.ValidateOrder(req, out string message))
+            Console.WriteLine($"Executing: {request.Symbol}, {request.Quantity}");
+
+            if (!_orderService.ValidateOrder(request, out string message))
             {
                 return BadRequest(new { Message = message });
             }
 
-            var response = _orderService.ExecuteOrder(req);
+            var response = _orderService.ExecuteOrder(request);
 
             return response.IsSuccess
                 ? Ok(response)
@@ -35,14 +37,29 @@ namespace StocksAssignment.Controllers
         [HttpPost("validate")]
         public IActionResult ValidateOrder(OrderRequest request)
         {
-            if (!_orderService.ValidateOrder(request, out string message))
+            Console.WriteLine($"Validating: {request.Symbol}, {request.Quantity}");
+
+
+            if (!_orderService.ValidateOrder(request, out string errorMessage))
             {
-                return BadRequest(new { Message = message });
+                return Ok(new OrderResponse
+                {
+                    IsSuccess = false,
+                    ErrorMessage = errorMessage
+                });
+
             }
-            return Ok(new { Message = "Order is valid" });
+
+            return Ok(new OrderResponse
+            {
+                IsSuccess = true,
+                ErrorMessage = null
+            });
+
+
+
+
         }
-
-
-
     }
+
 }

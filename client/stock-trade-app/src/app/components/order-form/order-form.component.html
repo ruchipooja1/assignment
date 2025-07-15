@@ -25,19 +25,23 @@
 </form>
 </div>
 
-<div *ngIf="orderForm.get('quantity')?.value">
-<p>Total Cost: Euro {{ totalCost }} </p>
+<div *ngIf="orderForm.get('quantity')?.value && orderForm.get('symbol')?.value" class="order-summary">
+  <h3>Order Summary</h3>
+  <p>Stock Symbol: {{ orderForm.value.symbol }}</p>
+  <p>Quantity: {{ orderForm.value.quantity }}</p>
+  <p *ngIf="totalCost">Price per Share: Euro {{ stockPrice }}</p>
+  <p>Total Cost: Euro {{ totalCost }} </p>
 </div>
 
 <div *ngIf="showConfirm" class="confirm-dialog">
 <p>
-    You are able to buy {{ orderForm.value.quantity }} Apple shares ({{orderForm.value.symbol }}) for Euro {{ totalCost }}.
+    You are able to buy {{ orderForm.value.quantity }} share(s) of ({{orderForm.value.symbol }}) for Euro {{ totalCost }}.
 </p>
 <button (click)="submitOrder()">Confirm</button>
-<button (click)="showConfirm=false">Cancel</button>
+<button (click)="cancelOrder()">Cancel</button>
 </div>
 
-<div *ngIf="orderStatus">
+<div *ngIf="orderStatus"  class="status-box">
   <p>{{ orderStatus }}</p>
 </div>
 
